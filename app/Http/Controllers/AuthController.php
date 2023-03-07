@@ -43,11 +43,16 @@ class AuthController extends Controller
 //        }
         $token = $user->createToken('main')->plainTextToken;
         return response([
-            die(var_dump(1)),
             'user' => new UserResource($user),
             'token' => $token
 
         ]);
 
+    }
+    public function logout()
+    {
+        $user = Auth::user();
+        $user->currentAccessToken()->delete();
+        return response('',204);
     }
 }

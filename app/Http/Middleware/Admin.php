@@ -19,7 +19,7 @@ class Admin
         if (Auth::user() && Auth::user()->is_admin ==1){
             return $next($request);
         }
-        return \response([
+        return response([
             'message' => 'You don\'t have permission to perform this action'
         ],403);
     }
