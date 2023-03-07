@@ -62,7 +62,7 @@ const user = {
 
 function login(){
     loading.value = true;
-    store.dispatch('login',user)
+    store.dispatch('login', user)
         .then(() => {
             loading.value = false;
             router.push({name: 'app.dashboard'})

@@ -41,11 +41,12 @@ class AuthController extends Controller
 //                'message' => 'Your email is not verified'
 //            ],403);
 //        }
-
         $token = $user->createToken('main')->plainTextToken;
         return response([
+            die(var_dump(1)),
             'user' => new UserResource($user),
             'token' => $token
+
         ]);
 
     }
