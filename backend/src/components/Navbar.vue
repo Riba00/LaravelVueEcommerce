@@ -7,11 +7,11 @@
         <Menu as="div" class="relative inline-block text-left">
             <MenuButton class="flex items-center">
                 <img alt="" src="https://randomuser.me/api/portraits/men/1.jpg" class="rounded-full w-8 mr-2">
-                <!--                <small>{{ currentUser.name }}</small>-->
-                <!--                <ChevronDownIcon-->
-                <!--                    class="h-5 w-5 text-violet-200 hover:text-violet-100"-->
-                <!--                    aria-hidden="true"-->
-                <!--                />-->
+                <small>{{ currentUser.name }}</small>
+                <ChevronDownIcon
+                    class="h-5 w-5 text-violet-200 hover:text-violet-100"
+                    aria-hidden="true"
+                />
             </MenuButton>
 
             <transition
@@ -67,10 +67,11 @@
 <script setup>
 import {MenuIcon, LogoutIcon, UserIcon} from '@heroicons/vue/outline'
 import {Menu, MenuButton, MenuItems, MenuItem} from '@headlessui/vue'
-// import {ChevronDownIcon} from '@heroicons/vue/solid'
-import store from "../store";
+import {ChevronDownIcon} from '@heroicons/vue/solid'
+import state from "../store";
 import router from "../router";
 import {computed} from "vue";
+import store from "../store";
 
 const emit = defineEmits(['toggle-sidebar'])
 

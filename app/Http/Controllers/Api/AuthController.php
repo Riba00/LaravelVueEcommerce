@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function Webmozart\Assert\Tests\StaticAnalysis\boolean;
 
 class AuthController extends Controller
 {
@@ -21,7 +20,7 @@ class AuthController extends Controller
         $remember = $credentials['remember'] ?? false;
         unset($credentials['remember']);
 
-        if (!Auth::attempt($credentials,$remember)) {
+        if (!Auth::attempt($credentials, $remember)) {
             return response([
                 'message' => 'Email or password is incorrect'
             ], 422);
@@ -32,7 +31,7 @@ class AuthController extends Controller
             Auth::logout();
             return response([
                 'message' => 'You are not an Admin'
-            ],403);
+            ], 403);
         }
 
 //        if (!$user->email_verified_at){
@@ -49,10 +48,16 @@ class AuthController extends Controller
         ]);
 
     }
+
     public function logout()
     {
         $user = Auth::user();
         $user->currentAccessToken()->delete();
-        return response('',204);
+        return response('', 204);
+    }
+
+    public function getUser(Request $request)
+    {
+        return $request->user();
     }
 }

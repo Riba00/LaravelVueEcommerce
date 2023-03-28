@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-full bg-gray-200 flex">
+    <div v-if="currentUser.id" class="min-h-full bg-gray-200 flex">
         <Sidebar :class="{'-ml-[200px]': !sidebarOpened}"/>
 
         <div class="flex-1">
@@ -9,8 +9,8 @@
             </main>
         </div>
     </div>
-    <div class="min-h-full bg-gray-200 flex items-center justify-center">
-<!--        <Spinner />-->
+    <div v-else class="min-h-full bg-gray-200 flex items-center justify-center">
+        <Spinner />
     </div>
 <!--    <Toast />-->
 </template>
@@ -19,8 +19,8 @@
 import {ref, computed, onMounted, onUnmounted} from 'vue'
 import Sidebar from "./Sidebar.vue";
 import Navbar from "./Navbar.vue";
+import Spinner from "@/components/core/Spinner.vue";
 import store from "../store";
-// import Spinner from "./core/Spinner.vue";
 // import Toast from "./core/Toast.vue";
 
 const {title} = defineProps({
@@ -38,8 +38,8 @@ function updateSidebarState() {
 }
 
 onMounted(() => {
-    // store.dispatch('getCurrentUser')
-    // store.dispatch('getCountries')
+    store.dispatch('getUser')
+    // state.dispatch('getCountries')
     updateSidebarState();
     window.addEventListener('resize', updateSidebarState)
 })
